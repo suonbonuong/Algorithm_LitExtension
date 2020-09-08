@@ -14,7 +14,7 @@ def gen_expr():
     #return [expr(p) for p in product(op, repeat=9) if p[0] != '+']
     result = []
     for p in prod_replicate(op, repeat=9):
-        if p[0] != "+":
+        if p[0] != "+" and p[0] != "-":
             result.append(expr(p))
     return result
 
@@ -28,8 +28,11 @@ def all_exprs():
             values[val] += 1
     return values
 
+count = 0
 def sum_to(val):
     for s in filter(lambda x: x[0] == val, map(lambda x: (eval(x), x), gen_expr())):
         print(s)
+        print(type(s))
+
 
 sum_to(100)
