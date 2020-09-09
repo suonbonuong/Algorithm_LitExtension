@@ -13,10 +13,9 @@ mydb = mysql.connector.connect(host="127.0.0.1", user='root', port=3306,
 
 # create table 
 mycursor = mydb.cursor()
-mycursor.execute("DROP TABLE IF EXISTS customerss")
-# mycursor.execute("CREATE DATABASE mydatabase")
+mycursor.execute("DROP TABLE IF EXISTS customer")
 
-mycursor.execute("""CREATE TABLE customerss (customerid VARCHAR(255),
+mycursor.execute("""CREATE TABLE customer (customerid VARCHAR(255),
                                firstname VARCHAR(255),
                                lastname VARCHAR(255),
                                companyname VARCHAR(255),
@@ -30,8 +29,10 @@ mycursor.execute("""CREATE TABLE customerss (customerid VARCHAR(255),
                                emailaddress VARCHAR(255),
                                createdate VARCHAR(255))""") 
 
-for row in list(data[1:]):
-    mycursor.execute('INSERT INTO customerss(customerid,firstname,lastname,companyname,billingaddress1,billingaddress2,city,stat,pastalcode,country,phonenumber,emailaddress,createdate) VALUES ("%s", "%s", "%s", "%s", "%s", "%s", "%s", "%s", "%s", "%s", "%s", "%s", "%s")', row)
+   
+data = list(data)
+for row in data[1:]:
+    mycursor.execute('INSERT INTO customer(customerid,firstname,lastname,companyname,billingaddress1,billingaddress2,city,stat,pastalcode,country,phonenumber,emailaddress,createdate) VALUES ("%s", "%s", "%s", "%s", "%s", "%s", "%s", "%s", "%s", "%s", "%s", "%s", "%s")', row)
 mydb.commit()
 mycursor.close()
 print('Done')
